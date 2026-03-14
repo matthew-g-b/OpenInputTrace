@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -22,6 +23,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QProgressBar *rightTriggerBar;
+    QWidget *quickViewContainer;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -32,6 +35,14 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
+        rightTriggerBar = new QProgressBar(centralwidget);
+        rightTriggerBar->setObjectName("rightTriggerBar");
+        rightTriggerBar->setGeometry(QRect(590, 500, 118, 23));
+        rightTriggerBar->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        rightTriggerBar->setValue(50);
+        quickViewContainer = new QWidget(centralwidget);
+        quickViewContainer->setObjectName("quickViewContainer");
+        quickViewContainer->setGeometry(QRect(20, 30, 751, 441));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");

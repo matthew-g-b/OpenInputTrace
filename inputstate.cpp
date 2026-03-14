@@ -149,6 +149,18 @@ void InputState::pollController(){
         if(dpadRight()){
             std::cout << "Dpad right pressed!" << std::endl; //For debugging pollController. Remove this!
         }
+
+        // Right trigger
+        m_rightTrigger = static_cast<float>(m_xinputState.Gamepad.bRightTrigger) / 255.0f;
+
+        // Left trigger
+        m_leftTrigger = static_cast<float>(m_xinputState.Gamepad.bLeftTrigger) / 255.0f;
+
+        // Right stick
+        m_rightStickX = static_cast<float>(m_xinputState.Gamepad.sThumbRX) / 32767.0f;
+        m_rightStickY = static_cast<float>(m_xinputState.Gamepad.sThumbRY) / 32767.0f;
+
+        emit stateChanged();
     }
     else{
         m_connected = false;
