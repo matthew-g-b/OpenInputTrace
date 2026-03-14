@@ -94,7 +94,6 @@ bool InputState::dpadLeft() const{
 }
 
 bool InputState::dpadRight() const{
-    std::cout << "Dpad right pressed!" << std::endl; //For debugging pollController. Remove this!
     return buttonPressed(XINPUT_GAMEPAD_DPAD_RIGHT);
 }
 
@@ -146,6 +145,10 @@ void InputState::pollController(){
     if(result == ERROR_SUCCESS){
         m_connected = true;
         m_xinputState = state;
+
+        if(dpadRight()){
+            std::cout << "Dpad right pressed!" << std::endl; //For debugging pollController. Remove this!
+        }
     }
     else{
         m_connected = false;

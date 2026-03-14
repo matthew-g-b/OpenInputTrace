@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QTimer>
 
-#include <xinput.h>
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <xinput.h>
 
 class InputState : public QObject
 {
