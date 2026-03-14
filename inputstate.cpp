@@ -1,3 +1,3 @@
 #include "inputstate.h"
 
-inputState::inputState() {}
+InputState::InputState(QObject *parent = nullptr) {}
