@@ -47,7 +47,7 @@ public:
     void startPolling(int intervalMs = 16); // ~60 FPS default
     void stopPolling();
 
-    // Choose which XInput controller slot to read (0-3)
+    // Choose which XInput controller slot to read [0-3]
     void setControllerIndex(DWORD index);
     DWORD controllerIndex() const;
 
@@ -110,6 +110,9 @@ private:
 
     float m_leftTrigger = 0.0f;
     float m_rightTrigger = 0.0f;
+
+    // Helper for reading digital input
+    bool buttonPressed(WORD mask) const;
 };
 
 #endif // INPUTSTATE_H
