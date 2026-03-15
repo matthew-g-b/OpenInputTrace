@@ -1,6 +1,7 @@
 #include "inputstate.h"
 
 #include <iostream>
+#include <algorithm>
 
 InputState::InputState(QObject *parent) : QObject(parent) {
     connect(&m_pollTimer, &QTimer::timeout, this, &InputState::pollController);
@@ -72,6 +73,20 @@ float InputState::leftTrigger() const{
 }
 float InputState::rightTrigger() const{
     return m_rightTrigger;
+}
+
+/*
+ * Analog mangnitude values
+ */
+
+float InputState::rightStickMagnitude() const{
+    float magnitude = std::sqrt((m_rightStickX * m_rightStickX) + (m_rightStickY * m_rightStickY));
+    return std::clamp(magnitude, 0.0f, 1.0f);
+}
+
+float InputState::leftStickMagnitude() const{
+    float magnitude = std::sqrt((m_leftStickX * m_leftStickX) + (m_leftStickY * m_leftStickY));
+    return std::clamp(magnitude, 0.0f, 1.0f);
 }
 
 /*
@@ -159,6 +174,10 @@ void InputState::pollController(){
         // Right stick
         m_rightStickX = static_cast<float>(m_xinputState.Gamepad.sThumbRX) / 32767.0f;
         m_rightStickY = static_cast<float>(m_xinputState.Gamepad.sThumbRY) / 32767.0f;
+
+        // Left stick
+        m_leftStickX = static_cast<float>(m_xinputState.Gamepad.sThumbLX) / 32767.0f;
+        m_leftStickY = static_cast<float>(m_xinputState.Gamepad.sThumbLY) / 32767.0f;
 
         emit stateChanged();
     }

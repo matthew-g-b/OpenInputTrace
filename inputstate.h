@@ -41,6 +41,11 @@ class InputState : public QObject
     Q_PROPERTY(bool buttonX READ buttonX NOTIFY stateChanged)
     Q_PROPERTY(bool buttonY READ buttonY NOTIFY stateChanged)
 
+    // Mangnitude properties
+    Q_PROPERTY(float rightStickMagnitude READ rightStickMagnitude NOTIFY stateChanged)
+    Q_PROPERTY(float leftStickMagnitude READ leftStickMagnitude NOTIFY stateChanged)
+
+
 public:
     explicit InputState(QObject *parent = nullptr);
 
@@ -63,6 +68,10 @@ public:
 
     float leftTrigger() const;
     float rightTrigger() const;
+
+    // Analog magnitude values
+    float rightStickMagnitude() const;
+    float leftStickMagnitude() const;
 
     // Digital buttons
     bool dpadUp() const;

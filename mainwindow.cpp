@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     QQuickWidget *quickWidget = new QQuickWidget(this);
     quickWidget->rootContext()->setContextProperty("inputState", &inputState);
     quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-    quickWidget->setSource(QUrl("qrc:/MainView.qml"));
+    //quickWidget->setSource(QUrl("qrc:/MainView.qml"));
+    quickWidget->setSource(QUrl("qrc:/StandardControllerView.qml"));
     if (quickWidget->status() == QQuickWidget::Error) {
         qDebug() << quickWidget->errors();
     }
