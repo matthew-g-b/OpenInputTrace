@@ -28,6 +28,8 @@ public:
     QWidget *quickViewContainer;
     QLabel *rightTriggerDriftLabel;
     QLabel *leftTriggerDriftLabel;
+    QLabel *leftStickDriftLabel;
+    QLabel *rightStickDriftLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -48,16 +50,30 @@ public:
         quickViewContainer->setGeometry(QRect(20, 30, 751, 441));
         rightTriggerDriftLabel = new QLabel(centralwidget);
         rightTriggerDriftLabel->setObjectName("rightTriggerDriftLabel");
-        rightTriggerDriftLabel->setGeometry(QRect(240, 470, 241, 71));
+        rightTriggerDriftLabel->setGeometry(QRect(200, 470, 191, 71));
         QFont font;
         font.setPointSize(15);
         rightTriggerDriftLabel->setFont(font);
+        rightTriggerDriftLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         rightTriggerDriftLabel->setWordWrap(true);
         leftTriggerDriftLabel = new QLabel(centralwidget);
         leftTriggerDriftLabel->setObjectName("leftTriggerDriftLabel");
-        leftTriggerDriftLabel->setGeometry(QRect(20, 470, 211, 71));
+        leftTriggerDriftLabel->setGeometry(QRect(20, 470, 181, 71));
         leftTriggerDriftLabel->setFont(font);
+        leftTriggerDriftLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         leftTriggerDriftLabel->setWordWrap(true);
+        leftStickDriftLabel = new QLabel(centralwidget);
+        leftStickDriftLabel->setObjectName("leftStickDriftLabel");
+        leftStickDriftLabel->setGeometry(QRect(390, 470, 191, 71));
+        leftStickDriftLabel->setFont(font);
+        leftStickDriftLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        leftStickDriftLabel->setWordWrap(true);
+        rightStickDriftLabel = new QLabel(centralwidget);
+        rightStickDriftLabel->setObjectName("rightStickDriftLabel");
+        rightStickDriftLabel->setGeometry(QRect(580, 470, 191, 71));
+        rightStickDriftLabel->setFont(font);
+        rightStickDriftLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        rightStickDriftLabel->setWordWrap(true);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -75,8 +91,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        rightTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "Potential drift at", nullptr));
-        leftTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        rightTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "Possible right trigger drift", nullptr));
+        leftTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "Possible left trigger drift", nullptr));
+        leftStickDriftLabel->setText(QCoreApplication::translate("MainWindow", "Possible left stick drift", nullptr));
+        rightStickDriftLabel->setText(QCoreApplication::translate("MainWindow", "Possible right stick drift", nullptr));
     } // retranslateUi
 
 };

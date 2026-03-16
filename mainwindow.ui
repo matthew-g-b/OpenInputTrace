@@ -112,6 +112,30 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="rightStickDriftLabel">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>470</y>
+      <width>191</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Possible right stick drift</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
