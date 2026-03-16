@@ -14,7 +14,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -24,7 +23,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QProgressBar *rightTriggerBar;
     QWidget *quickViewContainer;
     QLabel *rightTriggerDriftLabel;
     QLabel *leftTriggerDriftLabel;
@@ -40,14 +38,9 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        rightTriggerBar = new QProgressBar(centralwidget);
-        rightTriggerBar->setObjectName("rightTriggerBar");
-        rightTriggerBar->setGeometry(QRect(630, 0, 118, 23));
-        rightTriggerBar->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-        rightTriggerBar->setValue(50);
         quickViewContainer = new QWidget(centralwidget);
         quickViewContainer->setObjectName("quickViewContainer");
-        quickViewContainer->setGeometry(QRect(20, 30, 751, 441));
+        quickViewContainer->setGeometry(QRect(20, 0, 751, 471));
         rightTriggerDriftLabel = new QLabel(centralwidget);
         rightTriggerDriftLabel->setObjectName("rightTriggerDriftLabel");
         rightTriggerDriftLabel->setGeometry(QRect(200, 470, 191, 71));

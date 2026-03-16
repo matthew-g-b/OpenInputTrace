@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_rightStickDriftTimer = new QTimer(this);
     m_rightStickDriftTimer->setSingleShot(true);
 
+    m_leftStickDriftTimer = new QTimer(this);
+    m_leftStickDriftTimer->setSingleShot(true);
+
 
     // Right trigger drift message display
     connect(m_rightTriggerDriftTimer, &QTimer::timeout, this, [this]() {
@@ -51,25 +54,27 @@ MainWindow::MainWindow(QWidget *parent)
         ui->rightStickDriftLabel->show();
     });
 
+    // Left stick drift message display
+    connect(m_leftStickDriftTimer, &QTimer::timeout, this, [this]() {
+        ui->leftStickDriftLabel->show();
+    });
+
     // Analog input drift detection
     connect(&inputState, &InputState::stateChanged, this, [this](){
         float rightTriggerValue = inputState.rightTrigger();
         float leftTriggerValue = inputState.leftTrigger();
         float rightStickMagnitude = inputState.rightStickMagnitude();
-
-
-        // Ui widget for testing input
-        int value = static_cast<int>(rightTriggerValue * 100.0f);
-        ui->rightTriggerBar->setValue(value);
+        float leftStickMagnitude = inputState.leftStickMagnitude();
 
         // Stick drift detection parameters
         constexpr float driftMin = 0.03f;
         constexpr float driftMax = 0.15f;
-        constexpr int driftPersistenceMs = 500; //2000
+        constexpr int driftPersistenceMs = 2000;
 
         bool RTinSuspiciousRange = (rightTriggerValue >= driftMin && rightTriggerValue <= driftMax);
         bool LTinSuspiciousRange = (leftTriggerValue >= driftMin && leftTriggerValue <= driftMax);
         bool RSinSuspiciousRange = (rightStickMagnitude >= driftMin && rightStickMagnitude <= driftMax);
+        bool LSinSuspiciousRange = (leftStickMagnitude >= driftMin && leftStickMagnitude <= driftMax);
 
         // Detect right trigger drift
         if (RTinSuspiciousRange) {
@@ -105,6 +110,18 @@ MainWindow::MainWindow(QWidget *parent)
             m_rightStickInDriftRange = false;
             m_rightStickDriftTimer->stop();
             ui->rightStickDriftLabel->hide();
+        }
+
+        // Detect left stick drift
+        if (LSinSuspiciousRange) {
+            if (!m_leftStickInDriftRange) {
+                m_leftStickInDriftRange = true;
+                m_leftStickDriftTimer->start(driftPersistenceMs);
+            }
+        } else {
+            m_leftStickInDriftRange = false;
+            m_leftStickDriftTimer->stop();
+            ui->leftStickDriftLabel->hide();
         }
     });
 
