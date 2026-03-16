@@ -28,5 +28,8 @@ private:
 
     QTimer *m_leftTriggerDriftTimer = nullptr;
     bool m_leftTriggerInDriftRange = false;
+
+    QTimer *m_rightStickDriftTimer = nullptr;
+    bool m_rightStickInDriftRange = false;
 };
 #endif // MAINWINDOW_H

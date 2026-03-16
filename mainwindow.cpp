@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Hide analog input drift labels
     ui->rightTriggerDriftLabel->setVisible(false);
     ui->leftTriggerDriftLabel->setVisible(false);
+    ui->rightStickDriftLabel->setVisible(false);
+    ui->leftStickDriftLabel->setVisible(false);
 
     // InputState setup
     inputState.setControllerIndex(0);
@@ -27,23 +29,33 @@ MainWindow::MainWindow(QWidget *parent)
     m_leftTriggerDriftTimer = new QTimer(this);
     m_leftTriggerDriftTimer->setSingleShot(true);
 
+    m_rightStickDriftTimer = new QTimer(this);
+    m_rightStickDriftTimer->setSingleShot(true);
+
 
     // Right trigger drift message display
     connect(m_rightTriggerDriftTimer, &QTimer::timeout, this, [this]() {
-        ui->rightTriggerDriftLabel->setText("Possible right trigger drift");
+       // ui->rightTriggerDriftLabel->setText("Possible right trigger drift");
         ui->rightTriggerDriftLabel->show();
     });
 
     // Left trigger drift message display
     connect(m_leftTriggerDriftTimer, &QTimer::timeout, this, [this]() {
-        ui->leftTriggerDriftLabel->setText("Possible left trigger drift");
+        //ui->leftTriggerDriftLabel->setText("Possible left trigger drift");
         ui->leftTriggerDriftLabel->show();
+    });
+
+    // Right stick drift message display
+    connect(m_rightStickDriftTimer, &QTimer::timeout, this, [this]() {
+        //ui->rightTriggerDriftLabel->setText("Possible right trigger drift");
+        ui->rightStickDriftLabel->show();
     });
 
     // Analog input drift detection
     connect(&inputState, &InputState::stateChanged, this, [this](){
         float rightTriggerValue = inputState.rightTrigger();
         float leftTriggerValue = inputState.leftTrigger();
+        float rightStickMagnitude = inputState.rightStickMagnitude();
 
 
         // Ui widget for testing input
@@ -57,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         bool RTinSuspiciousRange = (rightTriggerValue >= driftMin && rightTriggerValue <= driftMax);
         bool LTinSuspiciousRange = (leftTriggerValue >= driftMin && leftTriggerValue <= driftMax);
+        bool RSinSuspiciousRange = (rightStickMagnitude >= driftMin && rightStickMagnitude <= driftMax);
 
         // Detect right trigger drift
         if (RTinSuspiciousRange) {
@@ -80,6 +93,18 @@ MainWindow::MainWindow(QWidget *parent)
             m_leftTriggerInDriftRange = false;
             m_leftTriggerDriftTimer->stop();
             ui->leftTriggerDriftLabel->hide();
+        }
+
+        // Detect right stick drift
+        if (RSinSuspiciousRange) {
+            if (!m_rightStickInDriftRange) {
+                m_rightStickInDriftRange = true;
+                m_rightStickDriftTimer->start(driftPersistenceMs);
+            }
+        } else {
+            m_rightStickInDriftRange = false;
+            m_rightStickDriftTimer->stop();
+            ui->rightStickDriftLabel->hide();
         }
     });
 
