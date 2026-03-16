@@ -40,6 +40,32 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="rightTriggerDriftLabel">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>470</y>
+      <width>281</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Potential drift at</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="leftTriggerDriftLabel">
+    <property name="geometry">
+     <rect>
+      <x>38</x>
+      <y>485</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -47,7 +73,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

@@ -21,5 +21,9 @@ public:
 private:
     Ui::MainWindow *ui;
     InputState inputState;
+
+    //Analog input drift timers
+    QTimer *m_rightTriggerDriftTimer = nullptr;
+    bool m_rightTriggerInDriftRange = false;
 };
 #endif // MAINWINDOW_H

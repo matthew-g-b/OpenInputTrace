@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
@@ -25,6 +26,7 @@ public:
     QWidget *centralwidget;
     QProgressBar *rightTriggerBar;
     QWidget *quickViewContainer;
+    QLabel *driftLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -43,10 +45,13 @@ public:
         quickViewContainer = new QWidget(centralwidget);
         quickViewContainer->setObjectName("quickViewContainer");
         quickViewContainer->setGeometry(QRect(20, 30, 751, 441));
+        driftLabel = new QLabel(centralwidget);
+        driftLabel->setObjectName("driftLabel");
+        driftLabel->setGeometry(QRect(250, 470, 331, 51));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 22));
+        menubar->setGeometry(QRect(0, 0, 800, 26));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -60,6 +65,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        driftLabel->setText(QCoreApplication::translate("MainWindow", "Potential drift at", nullptr));
     } // retranslateUi
 
 };
