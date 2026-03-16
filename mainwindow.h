@@ -25,5 +25,8 @@ private:
     //Analog input drift timers
     QTimer *m_rightTriggerDriftTimer = nullptr;
     bool m_rightTriggerInDriftRange = false;
+
+    QTimer *m_leftTriggerDriftTimer = nullptr;
+    bool m_leftTriggerInDriftRange = false;
 };
 #endif // MAINWINDOW_H

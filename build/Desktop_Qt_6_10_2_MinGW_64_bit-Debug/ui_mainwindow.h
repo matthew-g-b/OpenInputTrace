@@ -26,7 +26,8 @@ public:
     QWidget *centralwidget;
     QProgressBar *rightTriggerBar;
     QWidget *quickViewContainer;
-    QLabel *driftLabel;
+    QLabel *rightTriggerDriftLabel;
+    QLabel *leftTriggerDriftLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -39,15 +40,24 @@ public:
         centralwidget->setObjectName("centralwidget");
         rightTriggerBar = new QProgressBar(centralwidget);
         rightTriggerBar->setObjectName("rightTriggerBar");
-        rightTriggerBar->setGeometry(QRect(590, 500, 118, 23));
+        rightTriggerBar->setGeometry(QRect(630, 0, 118, 23));
         rightTriggerBar->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         rightTriggerBar->setValue(50);
         quickViewContainer = new QWidget(centralwidget);
         quickViewContainer->setObjectName("quickViewContainer");
         quickViewContainer->setGeometry(QRect(20, 30, 751, 441));
-        driftLabel = new QLabel(centralwidget);
-        driftLabel->setObjectName("driftLabel");
-        driftLabel->setGeometry(QRect(250, 470, 331, 51));
+        rightTriggerDriftLabel = new QLabel(centralwidget);
+        rightTriggerDriftLabel->setObjectName("rightTriggerDriftLabel");
+        rightTriggerDriftLabel->setGeometry(QRect(240, 470, 241, 71));
+        QFont font;
+        font.setPointSize(15);
+        rightTriggerDriftLabel->setFont(font);
+        rightTriggerDriftLabel->setWordWrap(true);
+        leftTriggerDriftLabel = new QLabel(centralwidget);
+        leftTriggerDriftLabel->setObjectName("leftTriggerDriftLabel");
+        leftTriggerDriftLabel->setGeometry(QRect(20, 470, 211, 71));
+        leftTriggerDriftLabel->setFont(font);
+        leftTriggerDriftLabel->setWordWrap(true);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -65,7 +75,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        driftLabel->setText(QCoreApplication::translate("MainWindow", "Potential drift at", nullptr));
+        rightTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "Potential drift at", nullptr));
+        leftTriggerDriftLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 
 };
